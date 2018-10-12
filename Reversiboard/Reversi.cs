@@ -99,13 +99,14 @@ namespace Reversiboard
         }
         private void GameCheck (int X, int Y, int user,bool spec)
         {
-            for(int i = -1; i < 2 && X+i >= 0 && X+i < diskarray.GetLength(0); i++)
+            for(int i = -1; i < 2; i++)
             {
-                for (int j = -1; j <2 && Y + j >= 0 && Y + j < diskarray.GetLength(1); j++)
+                if (X + i < 0 || X + i >= diskarray.GetLength(0)) { continue; }
+                for (int j = -1; j <2; j++)
                 {
-
-                    if (i == 0 && j == 0) { continue; }
-                    if (diskarray[X + i, Y + j].state > -1 && diskarray[X + i, Y + j].state != user)
+                    if(Y + j < 0 || Y + j >= diskarray.GetLength(1)) { continue; }
+                    else if (i == 0 && j == 0) { continue; }
+                    else if (diskarray[X + i, Y + j].state > -1 && diskarray[X + i, Y + j].state != user)
                     {
                         extendedCheck(X, Y, user, i, j, spec);
                     }
@@ -115,20 +116,28 @@ namespace Reversiboard
 
         private void extendedCheck(int X, int Y, int User, int dirX, int dirY,bool spec)
         {
-            for(int i = 1; X+i*dirX >= 0 && X+i*dirX < diskarray.GetLength(0)&& Y+i*dirY >= 0 && Y+i*dirY < diskarray.GetLength(1); i++)
+            for(int i = 1; i < diskarray.GetLength(1) && i < diskarray.GetLength(0) ; i++)
             {
-
+                int t = diskarray.GetLength(1);
+                Debug.WriteLine( (X + i * dirX < 0).ToString() + " - " + (X + i * dirX >= diskarray.GetLength(0)).ToString() + " - " + (Y + i * dirY < 0).ToString() + " - "  + (Y + i * dirY >= diskarray.GetLength(1)).ToString());
+                if ((X + i * dirX  < 0 || X + i * dirX >= diskarray.GetLength(0) || Y + i * dirY < 0 || Y + i * dirY >= diskarray.GetLength(1))) { continue; }
                 if (diskarray[X + i*dirX, Y + i*dirY].state < 0) { if (spec) { diskarray[X + i * dirX, Y + i * dirY].state = -2; break; } else { break; } }
-                else if (diskarray[X + i*dirX, Y + i*dirY].state == User&& !spec)
+                else if (diskarray[X + i*dirX, Y + i*dirY].state == User)
                 {
                     
-                    for (int j = i; j > 0; j--)
+                    if (!spec)
                     {
-                        diskarray[X+j*dirX, Y+j*dirY].state = User;
+                        for (int j = i; j > 0; j--)
+                        {
+                            diskarray[X + j * dirX, Y + j * dirY].state = User;
 
+                        }
+                        break;
+                    } else{
+                        break;
                     }
-                    break;
                 }
+
             }
         }      
         public void playTurn(object sender, MouseEventArgs mea)
