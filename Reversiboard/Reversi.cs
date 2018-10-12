@@ -20,6 +20,7 @@ namespace Reversiboard
             reversiboard rb = new reversiboard(pnlReversi);
             pnlReversi.Paint += rb.rbRender;
             pnlReversi.MouseClick += rb.playTurn;
+            this.SizeChanged += rb.ResizeRender;
         }
     }
     public class reversiboard
@@ -31,7 +32,7 @@ namespace Reversiboard
         public reversiboard(Panel pnlDisp)
         {
             Display = pnlDisp;
-            diskarray = new disk[8,8];
+            diskarray = new disk[16,8];
             startgame();
         }
         private void startgame()
@@ -43,19 +44,19 @@ namespace Reversiboard
                     diskarray[i, j] = new disk();
                 }
             }
-            diskarray[diskarray.GetLength(0) / 2, diskarray.GetLength(1) / 2].state=0;
+            diskarray[diskarray.GetLength(0) / 2, diskarray.GetLength(1) / 2].state = 0;
             diskarray[diskarray.GetLength(0) / 2 - 1, diskarray.GetLength(1) / 2 - 1].state = 0;
-            diskarray[diskarray.GetLength(0) / 2-1, diskarray.GetLength(1) / 2].state = 1;
+            diskarray[diskarray.GetLength(0) / 2 - 1, diskarray.GetLength(1) / 2].state = 1;
             diskarray[diskarray.GetLength(0) / 2, diskarray.GetLength(1) / 2 - 1].state = 1;
-            totalturn = diskarray.GetLength(0) * diskarray.GetLength(1);
+            totalturn = diskarray.GetLength(0) * diskarray.GetLength(1)-4;
             currentturn = 0;
         }
-        private void SetState(int x,int y,int state)
+        private void SetState(int x, int y, int state)
         {
-            diskarray[x,y].state = state;
+            diskarray[x, y].state = state;
         }
 
-        public void rbRender (object sender, PaintEventArgs e)
+        public void rbRender(object sender, PaintEventArgs e)
         {
             for (int i = 0; i < diskarray.GetLength(0); i++)
             {
@@ -71,9 +72,9 @@ namespace Reversiboard
             {
                 for (int j = 0; j < diskarray.GetLength(1); j++)
                 {
-                    if (diskarray[i, j].state == currentturn%2)
+                    if (diskarray[i, j].state == currentturn % 2)
                     {
-                        GameCheck(i, j, currentturn%2,true);
+                        GameCheck(i, j, currentturn % 2, true);
                     }
                 }
             }
@@ -81,8 +82,8 @@ namespace Reversiboard
             int panelWidth = Display.Width / diskarray.GetLength(0);
             int panelHeight = Display.Height / diskarray.GetLength(1);
 
-            for (int i = 0; i < diskarray.GetLength(0); i++){
-                for(int j = 0; j < diskarray.GetLength(1); j++)
+            for (int i = 0; i < diskarray.GetLength(0); i++) {
+                for (int j = 0; j < diskarray.GetLength(1); j++)
                 {
                     switch (diskarray[i, j].state)
                     {
@@ -91,20 +92,20 @@ namespace Reversiboard
                         case 0: diskcolor = Color.White; break;
                         case 1: diskcolor = Color.Black; break;
                     }
-                    e.Graphics.FillRectangle(new SolidBrush(diskcolor), new Rectangle(new Point(i * panelWidth,j * panelHeight), new Size(panelWidth, panelHeight)));
+                    e.Graphics.FillRectangle(new SolidBrush(diskcolor), new Rectangle(new Point(i * panelWidth, j * panelHeight), new Size(panelWidth, panelHeight)));
                 }
             }
-            for (int i = 0; i < diskarray.GetLength(0); i++) { e.Graphics.DrawLine(new Pen(Brushes.Gray, 3), new Point(i * panelWidth, 0), new Point(i * panelWidth, Display.Height)); }
-            for (int i = 0; i < diskarray.GetLength(1); i++) { e.Graphics.DrawLine(new Pen(Brushes.Gray, 3), new Point(0, i * panelHeight), new Point(Display.Width, i * panelHeight)); }
+            for (int i = 0; i <= diskarray.GetLength(0); i++) { e.Graphics.DrawLine(new Pen(Brushes.Gray, 3), new Point(i * panelWidth, 0), new Point(i * panelWidth, panelHeight * diskarray.GetLength(1))); }
+            for (int i = 0; i <= diskarray.GetLength(1); i++) { e.Graphics.DrawLine(new Pen(Brushes.Gray, 3), new Point(0, i * panelHeight), new Point(panelWidth * diskarray.GetLength(0), i * panelHeight)); }
         }
-        private void GameCheck (int X, int Y, int user,bool spec)
+        private void GameCheck(int X, int Y, int user, bool spec)
         {
-            for(int i = -1; i < 2; i++)
+            for (int i = -1; i < 2; i++)
             {
                 if (X + i < 0 || X + i >= diskarray.GetLength(0)) { continue; }
-                for (int j = -1; j <2; j++)
+                for (int j = -1; j < 2; j++)
                 {
-                    if(Y + j < 0 || Y + j >= diskarray.GetLength(1)) { continue; }
+                    if (Y + j < 0 || Y + j >= diskarray.GetLength(1)) { continue; }
                     else if (i == 0 && j == 0) { continue; }
                     else if (diskarray[X + i, Y + j].state > -1 && diskarray[X + i, Y + j].state != user)
                     {
@@ -114,17 +115,17 @@ namespace Reversiboard
             }
         }
 
-        private void extendedCheck(int X, int Y, int User, int dirX, int dirY,bool spec)
+        private void extendedCheck(int X, int Y, int User, int dirX, int dirY, bool spec)
         {
-            for(int i = 1; i < diskarray.GetLength(1) && i < diskarray.GetLength(0) ; i++)
+            for (int i = 1; i < diskarray.GetLength(1) && i < diskarray.GetLength(0); i++)
             {
                 int t = diskarray.GetLength(1);
-                Debug.WriteLine( (X + i * dirX < 0).ToString() + " - " + (X + i * dirX >= diskarray.GetLength(0)).ToString() + " - " + (Y + i * dirY < 0).ToString() + " - "  + (Y + i * dirY >= diskarray.GetLength(1)).ToString());
-                if ((X + i * dirX  < 0 || X + i * dirX >= diskarray.GetLength(0) || Y + i * dirY < 0 || Y + i * dirY >= diskarray.GetLength(1))) { continue; }
-                if (diskarray[X + i*dirX, Y + i*dirY].state < 0) { if (spec) { diskarray[X + i * dirX, Y + i * dirY].state = -2; break; } else { break; } }
-                else if (diskarray[X + i*dirX, Y + i*dirY].state == User)
+                Debug.WriteLine((X + i * dirX < 0).ToString() + " - " + (X + i * dirX >= diskarray.GetLength(0)).ToString() + " - " + (Y + i * dirY < 0).ToString() + " - " + (Y + i * dirY >= diskarray.GetLength(1)).ToString());
+                if ((X + i * dirX < 0 || X + i * dirX >= diskarray.GetLength(0) || Y + i * dirY < 0 || Y + i * dirY >= diskarray.GetLength(1))) { continue; }
+                if (diskarray[X + i * dirX, Y + i * dirY].state < 0) { if (spec) { diskarray[X + i * dirX, Y + i * dirY].state = -2; break; } else { break; } }
+                else if (diskarray[X + i * dirX, Y + i * dirY].state == User)
                 {
-                    
+
                     if (!spec)
                     {
                         for (int j = i; j > 0; j--)
@@ -133,20 +134,23 @@ namespace Reversiboard
 
                         }
                         break;
-                    } else{
+                    } else {
                         break;
                     }
                 }
 
             }
-        }      
+        }
         public void playTurn(object sender, MouseEventArgs mea)
         {
-            Point clickpoint = new Point((int)Math.Floor((float)mea.X / (Display.Width/diskarray.GetLength(0))), (int)Math.Floor((float)mea.Y / (Display.Height/diskarray.GetLength(1))));
-            if (diskarray[clickpoint.X,clickpoint.Y].state == -2)
-            { 
+            Point clickpoint = new Point((int)Math.Floor((float)mea.X / (Display.Width / diskarray.GetLength(0))), (int)Math.Floor((float)mea.Y / (Display.Height / diskarray.GetLength(1))));
+            if (clickpoint.X == diskarray.GetLength(0)) { clickpoint.X -= 1; };
+            if (clickpoint.Y == diskarray.GetLength(1)) { clickpoint.Y -= 1; };
+
+            if (diskarray[clickpoint.X, clickpoint.Y].state == -2)
+            {
                 diskarray[clickpoint.X, clickpoint.Y].state = currentturn % 2;
-                this.GameCheck(clickpoint.X,clickpoint.Y, currentturn %2,false);
+                this.GameCheck(clickpoint.X, clickpoint.Y, currentturn % 2, false);
                 currentturn++;
                 Display.Invalidate();
             }
@@ -158,7 +162,7 @@ namespace Reversiboard
                 {
                     for (int j = 0; j < diskarray.GetLength(1); j++)
                     {
-                        if (diskarray[i,j].state == 0)
+                        if (diskarray[i, j].state == 0)
                         {
                             whitesum++;
                         }
@@ -171,7 +175,7 @@ namespace Reversiboard
                 if (whitesum > blacksum) {
                     MessageBox.Show("White won the game");
                 }
-                else if(whitesum == blacksum)
+                else if (whitesum == blacksum)
                 {
                     MessageBox.Show("It's a Draw");
                 }
@@ -195,6 +199,11 @@ namespace Reversiboard
                 state = -1;
             }
         }
+        public void ResizeRender(object sender, EventArgs e)
+        {
+            Display.Invalidate();
+        }
     }
+
 }
 
