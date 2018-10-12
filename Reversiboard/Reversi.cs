@@ -13,6 +13,7 @@ namespace Reversiboard
 {
     public partial class Reversi : Form
     {
+        //test
         public Reversi()
         {
             InitializeComponent();
