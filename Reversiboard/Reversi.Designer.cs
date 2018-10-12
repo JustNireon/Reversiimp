@@ -31,14 +31,14 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.pnlReversi = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnHelp = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblWit = new System.Windows.Forms.Label();
+            this.btnPas = new System.Windows.Forms.Button();
+            this.btnNew = new System.Windows.Forms.Button();
+            this.lblStatus = new System.Windows.Forms.Label();
+            this.lblZwart = new System.Windows.Forms.Label();
+            this.lblTitel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -75,14 +75,14 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(101)))), ((int)(((byte)(107)))));
-            this.panel2.Controls.Add(this.button3);
+            this.panel2.Controls.Add(this.btnHelp);
             this.panel2.Controls.Add(this.pictureBox1);
-            this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.button2);
-            this.panel2.Controls.Add(this.button1);
-            this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.label3);
-            this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.lblWit);
+            this.panel2.Controls.Add(this.btnPas);
+            this.panel2.Controls.Add(this.btnNew);
+            this.panel2.Controls.Add(this.lblStatus);
+            this.panel2.Controls.Add(this.lblZwart);
+            this.panel2.Controls.Add(this.lblTitel);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(0);
@@ -90,104 +90,105 @@
             this.panel2.Size = new System.Drawing.Size(302, 450);
             this.panel2.TabIndex = 4;
             // 
-            // button3
+            // btnHelp
             // 
-            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button3.FlatAppearance.BorderSize = 2;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(80, 246);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(117, 29);
-            this.button3.TabIndex = 9;
-            this.button3.Text = "Help";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnHelp.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnHelp.FlatAppearance.BorderSize = 2;
+            this.btnHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHelp.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            this.btnHelp.ForeColor = System.Drawing.Color.White;
+            this.btnHelp.Location = new System.Drawing.Point(80, 246);
+            this.btnHelp.Name = "btnHelp";
+            this.btnHelp.Size = new System.Drawing.Size(117, 29);
+            this.btnHelp.TabIndex = 9;
+            this.btnHelp.Text = "Help";
+            this.btnHelp.UseVisualStyleBackColor = true;
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Image = global::Reversiboard.Properties.Resources.swap_horizontal;
             this.pictureBox1.Location = new System.Drawing.Point(23, 30);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(48, 48);
             this.pictureBox1.TabIndex = 8;
             this.pictureBox1.TabStop = false;
             // 
-            // label2
+            // lblWit
             // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(101)))), ((int)(((byte)(107)))));
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(75, 92);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(137, 21);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Wit heeft {} stenen";
+            this.lblWit.AutoSize = true;
+            this.lblWit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(101)))), ((int)(((byte)(107)))));
+            this.lblWit.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.lblWit.ForeColor = System.Drawing.Color.White;
+            this.lblWit.Location = new System.Drawing.Point(75, 92);
+            this.lblWit.Name = "lblWit";
+            this.lblWit.Size = new System.Drawing.Size(137, 21);
+            this.lblWit.TabIndex = 2;
+            this.lblWit.Text = "Wit heeft {} stenen";
             // 
-            // button2
+            // btnPas
             // 
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button2.FlatAppearance.BorderSize = 2;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(79, 211);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(117, 29);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "Pas";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnPas.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnPas.FlatAppearance.BorderSize = 2;
+            this.btnPas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPas.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            this.btnPas.ForeColor = System.Drawing.Color.White;
+            this.btnPas.Location = new System.Drawing.Point(79, 211);
+            this.btnPas.Name = "btnPas";
+            this.btnPas.Size = new System.Drawing.Size(117, 29);
+            this.btnPas.TabIndex = 7;
+            this.btnPas.Text = "Pas";
+            this.btnPas.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btnNew
             // 
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button1.FlatAppearance.BorderSize = 2;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(79, 176);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(117, 29);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Nieuw spel";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnNew.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnNew.FlatAppearance.BorderSize = 2;
+            this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNew.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            this.btnNew.ForeColor = System.Drawing.Color.White;
+            this.btnNew.Location = new System.Drawing.Point(79, 176);
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(117, 29);
+            this.btnNew.TabIndex = 6;
+            this.btnNew.Text = "Nieuw spel";
+            this.btnNew.UseVisualStyleBackColor = true;
             // 
-            // label4
+            // lblStatus
             // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(101)))), ((int)(((byte)(107)))));
-            this.label4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(0, 429);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(105, 21);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "Wit is aan zet.";
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(101)))), ((int)(((byte)(107)))));
+            this.lblStatus.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lblStatus.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.lblStatus.ForeColor = System.Drawing.Color.White;
+            this.lblStatus.Location = new System.Drawing.Point(0, 429);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(105, 21);
+            this.lblStatus.TabIndex = 5;
+            this.lblStatus.Text = "Wit is aan zet.";
             // 
-            // label3
+            // lblZwart
             // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(101)))), ((int)(((byte)(107)))));
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(75, 123);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(153, 21);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Zwart heeft {} stenen";
+            this.lblZwart.AutoSize = true;
+            this.lblZwart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(101)))), ((int)(((byte)(107)))));
+            this.lblZwart.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.lblZwart.ForeColor = System.Drawing.Color.White;
+            this.lblZwart.Location = new System.Drawing.Point(75, 123);
+            this.lblZwart.Name = "lblZwart";
+            this.lblZwart.Size = new System.Drawing.Size(153, 21);
+            this.lblZwart.TabIndex = 4;
+            this.lblZwart.Text = "Zwart heeft {} stenen";
             // 
-            // label1
+            // lblTitel
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(101)))), ((int)(((byte)(107)))));
-            this.label1.Font = new System.Drawing.Font("Segoe UI Light", 21.75F);
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(72, 34);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(125, 40);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Reversi™";
+            this.lblTitel.AutoSize = true;
+            this.lblTitel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(101)))), ((int)(((byte)(107)))));
+            this.lblTitel.Font = new System.Drawing.Font("Segoe UI Light", 21.75F);
+            this.lblTitel.ForeColor = System.Drawing.Color.White;
+            this.lblTitel.Location = new System.Drawing.Point(72, 34);
+            this.lblTitel.Name = "lblTitel";
+            this.lblTitel.Size = new System.Drawing.Size(125, 40);
+            this.lblTitel.TabIndex = 1;
+            this.lblTitel.Text = "Reversi™";
             // 
             // Reversi
             // 
@@ -197,7 +198,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.MinimumSize = new System.Drawing.Size(816, 489);
             this.Name = "Reversi";
-            this.Text = "Form2";
+            this.Text = "Reversi";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -210,14 +211,14 @@
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnHelp;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblWit;
+        private System.Windows.Forms.Button btnPas;
+        private System.Windows.Forms.Button btnNew;
+        private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.Label lblZwart;
+        private System.Windows.Forms.Label lblTitel;
         private System.Windows.Forms.Panel pnlReversi;
     }
 }
