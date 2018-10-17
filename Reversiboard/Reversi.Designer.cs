@@ -157,6 +157,7 @@
             // 
             this.lblStatus.AutoSize = true;
             this.lblStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(101)))), ((int)(((byte)(107)))));
+            this.lblStatus.CausesValidation = false;
             this.lblStatus.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lblStatus.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.lblStatus.ForeColor = System.Drawing.Color.White;
@@ -216,9 +217,9 @@
         private System.Windows.Forms.Label lblWit;
         private System.Windows.Forms.Button btnPas;
         private System.Windows.Forms.Button btnNew;
-        private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.Label lblZwart;
         private System.Windows.Forms.Label lblTitel;
         private System.Windows.Forms.Panel pnlReversi;
+        public System.Windows.Forms.Label lblStatus;
     }
 }
