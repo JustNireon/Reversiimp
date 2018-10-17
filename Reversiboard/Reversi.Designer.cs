@@ -121,9 +121,9 @@
             this.lblWit.ForeColor = System.Drawing.Color.White;
             this.lblWit.Location = new System.Drawing.Point(75, 92);
             this.lblWit.Name = "lblWit";
-            this.lblWit.Size = new System.Drawing.Size(137, 21);
+            this.lblWit.Size = new System.Drawing.Size(136, 21);
             this.lblWit.TabIndex = 2;
-            this.lblWit.Text = "Wit heeft {} stenen";
+            this.lblWit.Text = "Wit heeft 2 stenen";
             // 
             // btnPas
             // 
@@ -175,9 +175,9 @@
             this.lblZwart.ForeColor = System.Drawing.Color.White;
             this.lblZwart.Location = new System.Drawing.Point(75, 123);
             this.lblZwart.Name = "lblZwart";
-            this.lblZwart.Size = new System.Drawing.Size(153, 21);
+            this.lblZwart.Size = new System.Drawing.Size(152, 21);
             this.lblZwart.TabIndex = 4;
-            this.lblZwart.Text = "Zwart heeft {} stenen";
+            this.lblZwart.Text = "Zwart heeft 2 stenen";
             // 
             // lblTitel
             // 

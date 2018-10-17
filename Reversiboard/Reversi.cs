@@ -13,23 +13,41 @@ namespace Reversiboard
 {
     public partial class Reversi : Form
     {
-
+        reversiboard rb;
         public Reversi()
         {
             InitializeComponent();
             Label[] labelarray = { lblStatus, lblWit, lblZwart };
-            reversiboard rb = new reversiboard(pnlReversi,labelarray);
+            rb = new reversiboard(pnlReversi);
             pnlReversi.Paint += rb.rbRender;
-            pnlReversi.MouseClick += rb.playTurn;
+            pnlReversi.MouseClick += playTurn;
             this.SizeChanged += rb.ResizeRender;
-            btnPas.Click += rb.passTurn;
-            btnNew.Click += rb.newGame;
+            btnPas.Click += passTurn;
+            btnNew.Click += newGame;
             btnHelp.Click += rb.support_click;
             this.DoubleBuffered = true;
-            
-
         }
 
+        public void playTurn (object sender, MouseEventArgs mea)
+        {
+            rb.playTurn(mea.X, mea.Y);
+            if (rb.currentturn % 2 == 0) { lblStatus.Text = "Wit is aan zet"; }
+            else { lblStatus.Text = "Zwart is aan zet"; }
+            lblWit.Text = "Wit heeft" + rb.whitetotal + "Disk(s)";
+            lblZwart.Text = "Zwart heeft" + rb.blacktotal + "Disk(s)";
+
+        }
+        public void passTurn(object sender, EventArgs e)
+        {
+            rb.passTurn();
+            if (rb.currentturn % 2 == 0) { lblStatus.Text = "Wit is aan zet"; }
+            else { lblStatus.Text = "Zwart is aan zet"; }
+        }
+        public void newGame(object sender, EventArgs e)
+        {
+            rb.setSize(8,8);
+            rb.startgame();
+        }
         public class reversiboard
         {
             disk[,] diskarray;
@@ -37,19 +55,19 @@ namespace Reversiboard
             int totalturn;
             public int currentturn;
             bool support;
-            Label[] labelarray;
-            int whitetotal, blacktotal,passcounter;
+            public int whitetotal, blacktotal, passcounter;
 
-            public reversiboard(Panel pnlDisp,Label [] labelarrays)
+            public reversiboard(Panel pnlDisp)
             {
-                labelarray = labelarrays;
                 Display = pnlDisp;
-                diskarray = new disk[16, 16];
+                diskarray = new disk[8, 8];
+                
                 startgame();
                 support = false;
             }
-            private void startgame()
+            public void startgame()
             {
+                
                 for (int i = 0; i < diskarray.GetLength(0); i++)
                 {
                     for (int j = 0; j < diskarray.GetLength(1); j++)
@@ -65,13 +83,14 @@ namespace Reversiboard
                 currentturn = 0;
                 Display.Invalidate();
             }
-            
+            public void setSize(int x, int y)
+            {
+                diskarray = new disk[x, y];
+            }
             public void rbRender(object sender, PaintEventArgs e)
             {
                 whitetotal = 0;
                 blacktotal = 0;
-                if (currentturn%2 == 0) { labelarray[0].Text = "Wit is aan de beurt"; }
-                if (currentturn % 2 == 1) { labelarray[0].Text = "Zwart is aan de beurt"; }
                 for (int i = 0; i < diskarray.GetLength(0); i++)
                 {
                     for (int j = 0; j < diskarray.GetLength(1); j++)
@@ -84,8 +103,6 @@ namespace Reversiboard
                         }
                     }
                 }
-                labelarray[1].Text = "Wit heeft " + whitetotal + " disk(s)";
-                labelarray[2].Text = "Zwart heeft " + blacktotal + " disk(s)";
                 for (int i = 0; i < diskarray.GetLength(0); i++)
                 {
                     for (int j = 0; j < diskarray.GetLength(1); j++)
@@ -162,10 +179,10 @@ namespace Reversiboard
 
                 }
             }
-            public void playTurn(object sender, MouseEventArgs mea)
+            public void playTurn(int X,int Y)
             {
                 
-                Point clickpoint = new Point((int)Math.Floor((float)mea.X / (Display.Width / diskarray.GetLength(0))), (int)Math.Floor((float)mea.Y / (Display.Height / diskarray.GetLength(1))));
+                Point clickpoint = new Point((int)Math.Floor((float)X / (Display.Width / diskarray.GetLength(0))), (int)Math.Floor((float)Y / (Display.Height / diskarray.GetLength(1))));
                 if (clickpoint.X == diskarray.GetLength(0)) { clickpoint.X -= 1; };
                 if (clickpoint.Y == diskarray.GetLength(1)) { clickpoint.Y -= 1; };
                 
@@ -203,20 +220,13 @@ namespace Reversiboard
                     }
                 }
             }
-            public void passTurn(object sender, EventArgs e)
+            public void passTurn()
             {
                 passcounter++;
                 currentturn++;
                 Display.Invalidate();
                 endCheck();
-                
             }
-            public void newGame(object sender, EventArgs e)
-            {
-                diskarray = new disk[8, 8];
-                startgame();
-            }
-
             public void support_click(object sender, EventArgs e)
             {
                 support = !support;
