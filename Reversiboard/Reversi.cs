@@ -1,172 +1,187 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Reversiboard
 {
     public partial class Reversi : Form
     {
-        reversiboard rb;
+        readonly Reversiboard rb;
         public Reversi()
         {
             InitializeComponent();
-            Label[] labelarray = { lblStatus, lblWit, lblZwart };
-            rb = new reversiboard(pnlReversi);
-            pnlReversi.Paint += rb.rbRender;
-            pnlReversi.MouseClick += playTurn;
-            this.SizeChanged += rb.ResizeRender;
-            btnPas.Click += passTurn;
-            btnNew.Click += newGame;
-            btnHelp.Click += rb.support_click;
-            this.DoubleBuffered = true;
+            
+            rb = new Reversiboard(pnlReversi);
+            pnlReversi.Paint += rb.RbRender;
+            pnlReversi.MouseClick += PlayTurn;
+            SizeChanged += ResizeRender;
+            btnPas.Click += PassTurn;
+            btnNew.Click += NewGame;
+            btnHelp.Click += rb.Support_click;
+            
+            
         }
 
-        public void playTurn (object sender, MouseEventArgs mea)
+        public void PlayTurn (object sender, MouseEventArgs mea)
         {
-            rb.playTurn(mea.X, mea.Y);
-            if (rb.currentturn % 2 == 0) { lblStatus.Text = "Wit is aan zet"; }
-            else { lblStatus.Text = "Zwart is aan zet"; }
-            lblWit.Text = "Wit heeft" + rb.whitetotal + "Disk(s)";
-            lblZwart.Text = "Zwart heeft" + rb.blacktotal + "Disk(s)";
+            rb.PlayTurn(mea.X, mea.Y);
+            lblStatus.Text = rb.Currentturn % 2 == 0 ? "Wit is aan zet" : "Zwart is aan zet";
+            rb.Diskcounter();
+            lblWit.Text = $"Wit heeft {rb.Whitetotal} Disk(s)";
+            lblZwart.Text = $"Zwart heeft {rb.Blacktotal} Disk(s)";
 
-        }
-        public void passTurn(object sender, EventArgs e)
+        } 
+        public void PassTurn(object sender, EventArgs e)
         {
-            rb.passTurn();
-            if (rb.currentturn % 2 == 0) { lblStatus.Text = "Wit is aan zet"; }
-            else { lblStatus.Text = "Zwart is aan zet"; }
+            rb.PassTurn();
+            lblStatus.Text = rb.Currentturn % 2 == 0 ? "Wit is aan zet" : "Zwart is aan zet";
         }
-        public void newGame(object sender, EventArgs e)
+        public void NewGame(object sender, EventArgs e)
         {
-            rb.setSize(8,8);
-            rb.startgame();
+            rb.SetSize(8,8);
+            rb.Startgame();
         }
-        public class reversiboard
+        public void ResizeRender(object sender, EventArgs e)
         {
-            disk[,] diskarray;
-            Panel Display;
-            int totalturn;
-            public int currentturn;
-            bool support;
-            public int whitetotal, blacktotal, passcounter;
-
-            public reversiboard(Panel pnlDisp)
+            int width = panelcell.Width;
+            int height = panelcell.Height;
+            if (width == height)
             {
-                Display = pnlDisp;
-                diskarray = new disk[8, 8];
+                return;
+            }
+
+            pnlReversi.Location = new Point((int)(width * 0.1), (int)(height * .1));
+            if (width > height)
+            {
+                pnlReversi.Height = (int) (height * 0.8);
+                pnlReversi.Width = (int) (height * 0.8);
+            }
+            else
+            {
+                pnlReversi.Height = (int) (width * 0.8);
+                pnlReversi.Width = (int) (width * 0.8);
+            }
+            pnlReversi.Invalidate();
+        }
+        public class Reversiboard
+        {
+            private Disk[,] _diskarray;
+            private Panel _display;
+
+            public int Totalturn;
+            public int Currentturn;
+            public bool Support;
+            public int Whitetotal, Blacktotal, Passcounter;
+
+            public Reversiboard(Panel pnlDisp)
+            {
+                _display = pnlDisp;
+                _diskarray = new Disk[8, 8];
+                Support = false;
+                Startgame();
+
+            }
+            public void Startgame()
+            {
                 
-                startgame();
-                support = false;
-            }
-            public void startgame()
-            {
-                
-                for (int i = 0; i < diskarray.GetLength(0); i++)
+                for (int i = 0; i < _diskarray.GetLength(0); i++)
                 {
-                    for (int j = 0; j < diskarray.GetLength(1); j++)
+                    for (int j = 0; j < _diskarray.GetLength(1); j++)
                     {
-                        diskarray[i, j] = new disk();
+                        _diskarray[i, j] = new Disk();
                     }
                 }
-                diskarray[diskarray.GetLength(0) / 2, diskarray.GetLength(1) / 2].state = 0;
-                diskarray[diskarray.GetLength(0) / 2 - 1, diskarray.GetLength(1) / 2 - 1].state = 0;
-                diskarray[diskarray.GetLength(0) / 2 - 1, diskarray.GetLength(1) / 2].state = 1;
-                diskarray[diskarray.GetLength(0) / 2, diskarray.GetLength(1) / 2 - 1].state = 1;
-                totalturn = diskarray.GetLength(0) * diskarray.GetLength(1) - 4;
-                currentturn = 0;
-                Display.Invalidate();
+                _diskarray[_diskarray.GetLength(0) / 2, _diskarray.GetLength(1) / 2].State = 0;
+                _diskarray[_diskarray.GetLength(0) / 2 - 1, _diskarray.GetLength(1) / 2 - 1].State = 0;
+                _diskarray[_diskarray.GetLength(0) / 2 - 1, _diskarray.GetLength(1) / 2].State = 1;
+                _diskarray[_diskarray.GetLength(0) / 2, _diskarray.GetLength(1) / 2 - 1].State = 1;
+                Totalturn = _diskarray.GetLength(0) * _diskarray.GetLength(1) - 4;
+                Currentturn = 0;
+                _display.Invalidate();
             }
-            public void setSize(int x, int y)
+            public void SetSize(int x, int y)
             {
-                diskarray = new disk[x, y];
+                _diskarray = new Disk[x, y];
             }
-            public void rbRender(object sender, PaintEventArgs e)
+            public void RbRender(object sender, PaintEventArgs e)
             {
-                whitetotal = 0;
-                blacktotal = 0;
-                for (int i = 0; i < diskarray.GetLength(0); i++)
+                Whitetotal = 0;
+                Blacktotal = 0;
+                for (int i = 0; i < _diskarray.GetLength(0); i++)
                 {
-                    for (int j = 0; j < diskarray.GetLength(1); j++)
+                    for (int j = 0; j < _diskarray.GetLength(1); j++)
                     {
-                        if (diskarray[i,j].state == 0) { whitetotal++; }
-                        if (diskarray[i, j].state == 1) { blacktotal++; }
-                        if (diskarray[i, j].state == -2)
+                        if (_diskarray[i,j].State == 0) { Whitetotal++; }
+                        if (_diskarray[i, j].State == 1) { Blacktotal++; }
+                        if (_diskarray[i, j].State == -2)
                         {
-                            diskarray[i, j].state = -1;
+                            _diskarray[i, j].State = -1;
                         }
                     }
                 }
-                for (int i = 0; i < diskarray.GetLength(0); i++)
+                for (int i = 0; i < _diskarray.GetLength(0); i++)
                 {
-                    for (int j = 0; j < diskarray.GetLength(1); j++)
+                    for (int j = 0; j < _diskarray.GetLength(1); j++)
                     {
-                        if (diskarray[i, j].state == currentturn % 2)
+                        if (_diskarray[i, j].State == Currentturn % 2)
                         {
-                            GameCheck(i, j, currentturn % 2, true);
+                            GameCheck(i, j, Currentturn % 2, true);
                         }
                     }
                 }
-                Color diskcolor = Color.Green;
-                int panelWidth = Display.Width / diskarray.GetLength(0);
-                int panelHeight = Display.Height / diskarray.GetLength(1);
+                int panelWidth = _display.Width / _diskarray.GetLength(0);
+                int panelHeight = _display.Height / _diskarray.GetLength(1);
 
-                for (int i = 0; i < diskarray.GetLength(0); i++)
+                for (int i = 0; i < _diskarray.GetLength(0); i++)
                 {
-                    for (int j = 0; j < diskarray.GetLength(1); j++)
+                    for (int j = 0; j < _diskarray.GetLength(1); j++)
                     {
-                        switch (diskarray[i, j].state)
+                        var diskcolor = _diskarray[i, j].DiskColor;
+                        if (_diskarray[i, j].State > -1 || (Support))
                         {
-                            case -2: if (support) { diskcolor = Color.Blue; } else { diskcolor = Color.Green; }; break;
-                            case -1: diskcolor = Color.Green; break;
-                            case 0: diskcolor = Color.White; break;
-                            case 1: diskcolor = Color.Black; break;
+                            e.Graphics.FillEllipse(new SolidBrush(diskcolor[0]), new Rectangle(new Point(i * panelWidth+3, j * panelHeight+3), new Size(panelWidth-6, panelHeight-6)));
+                            if (_diskarray[i, j].State > -1)
+                            {
+                                e.Graphics.FillEllipse(new SolidBrush(diskcolor[1]), new Rectangle(new Point(i * panelWidth + 12, j * panelHeight + 12), new Size(panelWidth - 24, panelHeight - 24)));
+                            }
                         }
-                        e.Graphics.FillRectangle(new SolidBrush(diskcolor), new Rectangle(new Point(i * panelWidth, j * panelHeight), new Size(panelWidth, panelHeight)));
                     }
                 }
-                for (int i = 0; i <= diskarray.GetLength(0); i++) { e.Graphics.DrawLine(new Pen(Brushes.Gray, 3), new Point(i * panelWidth, 0), new Point(i * panelWidth, panelHeight * diskarray.GetLength(1))); }
-                for (int i = 0; i <= diskarray.GetLength(1); i++) { e.Graphics.DrawLine(new Pen(Brushes.Gray, 3), new Point(0, i * panelHeight), new Point(panelWidth * diskarray.GetLength(0), i * panelHeight)); }
+                for (int i = 0; i <= _diskarray.GetLength(0); i++) { e.Graphics.DrawLine(new Pen(Brushes.DarkGreen, 3), new Point(i * panelWidth, 0), new Point(i * panelWidth, panelHeight * _diskarray.GetLength(1))); }
+                for (int i = 0; i <= _diskarray.GetLength(1); i++) { e.Graphics.DrawLine(new Pen(Brushes.DarkGreen, 3), new Point(0, i * panelHeight), new Point(panelWidth * _diskarray.GetLength(0), i * panelHeight)); }
             }
-            private void GameCheck(int X, int Y, int user, bool spec)
+            private void GameCheck(int x, int y, int user, bool spec)
             {
                 for (int i = -1; i < 2; i++)
                 {
-                    if (X + i < 0 || X + i >= diskarray.GetLength(0)) { continue; }
+                    if (x + i < 0 || x + i >= _diskarray.GetLength(0)) { continue; }
                     for (int j = -1; j < 2; j++)
                     {
-                        if (Y + j < 0 || Y + j >= diskarray.GetLength(1)) { continue; }
+                        if (y + j < 0 || y + j >= _diskarray.GetLength(1)) { continue; }
                         else if (i == 0 && j == 0) { continue; }
-                        else if (diskarray[X + i, Y + j].state > -1 && diskarray[X + i, Y + j].state != user)
+                        else if (_diskarray[x + i, y + j].State > -1 && _diskarray[x + i, y + j].State != user)
                         {
-                            extendedCheck(X, Y, user, i, j, spec);
+                            ExtendedCheck(x, y, user, i, j, spec);
                         }
                     }
                 }
 
             }
 
-            private void extendedCheck(int X, int Y, int User, int dirX, int dirY, bool spec)
+            private void ExtendedCheck(int x, int y, int user, int dirX, int dirY, bool spec)
             {
-                for (int i = 1; i < diskarray.GetLength(1) && i < diskarray.GetLength(0); i++)
+                for (int i = 1; i < _diskarray.GetLength(1) && i < _diskarray.GetLength(0); i++)
                 {
-                    int t = diskarray.GetLength(1);
-                    if ((X + i * dirX < 0 || X + i * dirX >= diskarray.GetLength(0) || Y + i * dirY < 0 || Y + i * dirY >= diskarray.GetLength(1))) { continue; }
-                    if (diskarray[X + i * dirX, Y + i * dirY].state < 0) { if (spec) { diskarray[X + i * dirX, Y + i * dirY].state = -2; break; } else { break; } }
-                    else if (diskarray[X + i * dirX, Y + i * dirY].state == User)
+                    if ((x + i * dirX < 0 || x + i * dirX >= _diskarray.GetLength(0) || y + i * dirY < 0 || y + i * dirY >= _diskarray.GetLength(1))) { continue; }
+                    if (_diskarray[x + i * dirX, y + i * dirY].State < 0) { if (spec) { _diskarray[x + i * dirX, y + i * dirY].State = -2; break; } else { break; } }
+                    else if (_diskarray[x + i * dirX, y + i * dirY].State == user)
                     {
 
                         if (!spec)
                         {
                             for (int j = i; j > 0; j--)
                             {
-                                diskarray[X + j * dirX, Y + j * dirY].state = User;
+                                _diskarray[x + j * dirX, y + j * dirY].State = user;
 
                             }
                             break;
@@ -179,76 +194,98 @@ namespace Reversiboard
 
                 }
             }
-            public void playTurn(int X,int Y)
+            public void PlayTurn(int x,int y)
             {
                 
-                Point clickpoint = new Point((int)Math.Floor((float)X / (Display.Width / diskarray.GetLength(0))), (int)Math.Floor((float)Y / (Display.Height / diskarray.GetLength(1))));
-                if (clickpoint.X == diskarray.GetLength(0)) { clickpoint.X -= 1; };
-                if (clickpoint.Y == diskarray.GetLength(1)) { clickpoint.Y -= 1; };
-                
-                if (diskarray[clickpoint.X, clickpoint.Y].state == -2)
+                Point clickpoint = new Point((int)Math.Floor((float)x / (_display.Width / _diskarray.GetLength(0))), (int)Math.Floor((float)y / (_display.Height / _diskarray.GetLength(1))));
+                if (clickpoint.X == _diskarray.GetLength(0)) { clickpoint.X -= 1; }
+
+                if (clickpoint.Y == _diskarray.GetLength(1)) { clickpoint.Y -= 1; }
+
+                if (_diskarray[clickpoint.X, clickpoint.Y].State == -2)
                 {
-                    passcounter = 0;
-                    diskarray[clickpoint.X, clickpoint.Y].state = currentturn % 2;
-                    this.GameCheck(clickpoint.X, clickpoint.Y, currentturn % 2, false);
-                    currentturn++;
-                    endCheck();
-                    Display.Invalidate();
+                    Passcounter = 0;
+                    _diskarray[clickpoint.X, clickpoint.Y].State = Currentturn % 2;
+                    GameCheck(clickpoint.X, clickpoint.Y, Currentturn % 2, false);
+                    Currentturn++;
+                    EndCheck();
+                    _display.Invalidate();
                 }
 
             }
-            public void endCheck()
+            public void EndCheck()
             {
-                if (passcounter == 2|| currentturn == totalturn)
+                if (Passcounter == 2|| Currentturn == Totalturn)
                 {
-                    diskcounter();
-                    if (whitetotal > blacktotal) { MessageBox.Show("Wit heeft gewonnen", "Gefeliciteerd!", MessageBoxButtons.OK, MessageBoxIcon.Information); }
-                    else if(whitetotal == blacktotal) { MessageBox.Show("Het is een Remise", "Volgende keer beter", MessageBoxButtons.OK, MessageBoxIcon.Information); }
+                    Diskcounter();
+                    if (Whitetotal > Blacktotal) { MessageBox.Show("Wit heeft gewonnen", "Gefeliciteerd!", MessageBoxButtons.OK, MessageBoxIcon.Information); }
+                    else if(Whitetotal == Blacktotal) { MessageBox.Show("Het is een Remise", "Volgende keer beter", MessageBoxButtons.OK, MessageBoxIcon.Information); }
                     else { MessageBox.Show("Zwart heeft gewonnen", "Gefeliciteerd!", MessageBoxButtons.OK, MessageBoxIcon.Information); }
                 }
             }
-            public void diskcounter()
+            public void Diskcounter()
             {
-                whitetotal = 0;
-                blacktotal = 0;
-                for (int i = 0; i < diskarray.GetLength(0); i++)
+                Whitetotal = 0;
+                Blacktotal = 0;
+                for (int i = 0; i < _diskarray.GetLength(0); i++)
                 {
-                    for (int j = 0; j < diskarray.GetLength(1); j++)
+                    for (int j = 0; j < _diskarray.GetLength(1); j++)
                     {
-                        if (diskarray[i, j].state == 0) { whitetotal++; }
-                        if (diskarray[i, j].state == 1) { blacktotal++; }
+                        if (_diskarray[i, j].State == 0) { Whitetotal++; }
+                        if (_diskarray[i, j].State == 1) { Blacktotal++; }
                     }
                 }
             }
-            public void passTurn()
+            public void PassTurn()
             {
-                passcounter++;
-                currentturn++;
-                Display.Invalidate();
-                endCheck();
+                Passcounter++;
+                Currentturn++;
+                _display.Invalidate();
+                EndCheck();
             }
-            public void support_click(object sender, EventArgs e)
+            public void Support_click(object sender, EventArgs e)
             {
-                support = !support;
-                Display.Invalidate();
+                Support = !Support;
+                _display.Invalidate();
             }
 
-            private class disk
+            private class Disk
             {
-                public int state;
+                public int State;
+
+                public Color[] DiskColor
+                {
+                    get
+                    {
+                        Color [] ColorSet = new Color[2];
+                        switch (State)
+                        {
+                            
+                            case -2: ColorSet[0] = Color.Yellow;
+                                return ColorSet;//Color.Yellow;
+                            case 0:
+                                ColorSet[0] = Color.FromArgb(237, 237, 233);
+                                ColorSet[1] = Color.FromArgb(217, 217, 208);
+                                return ColorSet;
+                            case 1:
+                                ColorSet[0] = Color.FromArgb(57, 59, 78);
+                                ColorSet[1] = Color.FromArgb(48, 49, 61);
+                                return ColorSet;
+                            default: 
+                                ColorSet[0] = Color.Green;
+                                return ColorSet;
+                        }
+                    }
+                }
 
                 // -2 Je kan hier plaatsen
                 // -1 Beschikbaar
                 // 0  Wit 
                 // 1 Zwart
-                public disk()
+                public Disk()
                 {
-                    state = -1;
+                    State = -1;
                 }
-            }
-            public void ResizeRender(object sender, EventArgs e)
-            {
-                Display.Invalidate();
             }
         }
     }

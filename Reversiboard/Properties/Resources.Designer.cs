@@ -63,6 +63,16 @@ namespace Reversiboard.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap floor_parquet_pattern_wood_wooden_floor_915182 {
+            get {
+                object obj = ResourceManager.GetObject("floor_parquet_pattern_wood_wooden_floor-915182", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap swap_horizontal {
             get {
                 object obj = ResourceManager.GetObject("swap-horizontal", resourceCulture);

@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.pnlReversi = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnHelp = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -39,38 +38,33 @@
             this.lblStatus = new System.Windows.Forms.Label();
             this.lblZwart = new System.Windows.Forms.Label();
             this.lblTitel = new System.Windows.Forms.Label();
+            this.panelcell = new System.Windows.Forms.Panel();
+            this.pnlReversi = new System.Windows.Forms.Panel();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panelcell.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.75F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 62.25F));
-            this.tableLayoutPanel1.Controls.Add(this.pnlReversi, 0, 0);
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 300F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.panel2, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.panelcell, 1, 0);
             this.tableLayoutPanel1.Cursor = System.Windows.Forms.Cursors.Default;
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 450);
             this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // pnlReversi
-            // 
-            this.pnlReversi.BackColor = System.Drawing.Color.White;
-            this.pnlReversi.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlReversi.Location = new System.Drawing.Point(302, 0);
-            this.pnlReversi.Margin = new System.Windows.Forms.Padding(0);
-            this.pnlReversi.Name = "pnlReversi";
-            this.pnlReversi.Size = new System.Drawing.Size(498, 450);
-            this.pnlReversi.TabIndex = 5;
             // 
             // panel2
             // 
@@ -87,7 +81,7 @@
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(302, 450);
+            this.panel2.Size = new System.Drawing.Size(300, 450);
             this.panel2.TabIndex = 4;
             // 
             // btnHelp
@@ -191,19 +185,55 @@
             this.lblTitel.TabIndex = 1;
             this.lblTitel.Text = "Reversi™";
             // 
+            // panelcell
+            // 
+            this.panelcell.Controls.Add(this.pnlReversi);
+            this.panelcell.Controls.Add(this.pictureBox2);
+            this.panelcell.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelcell.Location = new System.Drawing.Point(300, 0);
+            this.panelcell.Margin = new System.Windows.Forms.Padding(0);
+            this.panelcell.Name = "panelcell";
+            this.panelcell.Size = new System.Drawing.Size(500, 450);
+            this.panelcell.TabIndex = 5;
+            // 
+            // pnlReversi
+            // 
+            this.pnlReversi.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pnlReversi.BackColor = System.Drawing.Color.Green;
+            this.pnlReversi.Location = new System.Drawing.Point(51, 45);
+            this.pnlReversi.Margin = new System.Windows.Forms.Padding(0);
+            this.pnlReversi.Name = "pnlReversi";
+            this.pnlReversi.Size = new System.Drawing.Size(353, 360);
+            this.pnlReversi.TabIndex = 0;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackgroundImage = global::Reversiboard.Properties.Resources.floor_parquet_pattern_wood_wooden_floor_915182;
+            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox2.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(0);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(500, 450);
+            this.pictureBox2.TabIndex = 1;
+            this.pictureBox2.TabStop = false;
+            // 
             // Reversi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.MinimumSize = new System.Drawing.Size(816, 489);
+            this.DoubleBuffered = true;
+            this.MinimumSize = new System.Drawing.Size(750, 489);
             this.Name = "Reversi";
             this.Text = "Reversi";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panelcell.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -219,7 +249,9 @@
         private System.Windows.Forms.Button btnNew;
         private System.Windows.Forms.Label lblZwart;
         private System.Windows.Forms.Label lblTitel;
-        private System.Windows.Forms.Panel pnlReversi;
         public System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.Panel panelcell;
+        private System.Windows.Forms.Panel pnlReversi;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }
