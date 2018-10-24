@@ -135,6 +135,7 @@
             0,
             0,
             0});
+            this.numWidth.ValueChanged += new System.EventHandler(this.numWidth_ValueChanged);
             // 
             // lblBoardHeight
             // 
@@ -173,6 +174,7 @@
             0,
             0,
             0});
+            this.numHeight.ValueChanged += new System.EventHandler(this.numHeight_ValueChanged);
             // 
             // btnHelp
             // 

@@ -39,8 +39,9 @@ namespace Reversiboard
         }
         public void NewGame(object sender, EventArgs e)
         {
-            rb.SetSize(8,8);
-            rb.Startgame();
+            rb.Startgame((int)numWidth.Value, (int)numHeight.Value);
+            lblWit.Text = $"Wit heeft 2 Disk(s)";
+            lblZwart.Text = $"Zwart heeft 2 Disk(s)";
         }
         public void ResizeRender(object sender, EventArgs e)
         {
@@ -304,6 +305,16 @@ namespace Reversiboard
         private void instellenGrootteBordToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void numHeight_ValueChanged(object sender, EventArgs e)
+        {
+            lblStatus.Text = "Veranderingen bordgrootte worden \npas in het volgend spel doorgevoerd.";
+        }
+
+        private void numWidth_ValueChanged(object sender, EventArgs e)
+        {
+            lblStatus.Text = "Veranderingen bordgrootte worden \npas in het volgend spel doorgevoerd.";
         }
     }
 }
