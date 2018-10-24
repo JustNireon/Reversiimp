@@ -3,6 +3,9 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
+//Nog mogelijke toekomstige aanpassingen: Laat zien wat wordt veranderd on hover
+
+
 namespace Reversiboard
 {
     public partial class Reversi : Form
