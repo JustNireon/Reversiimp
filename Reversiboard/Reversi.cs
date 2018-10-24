@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -50,23 +51,31 @@ namespace Reversiboard
                 return;
             }
 
+            float scalesizeW =  (float) rb.DiskSize[0]/rb.DiskSize[1];
+            float scalesizeH = (float) rb.DiskSize[1] / rb.DiskSize[0];
+            scalesizeH =  scalesizeH < scalesizeW? scalesizeH: 1;
+            scalesizeW = scalesizeH > scalesizeW ? scalesizeW : 1;
             pnlReversi.Location = new Point((int)(width * 0.1), (int)(height * .1));
             if (width > height)
             {
-                pnlReversi.Height = (int) (height * 0.8);
-                pnlReversi.Width = (int) (height * 0.8);
+                Debug.WriteLine(height +  0.8 +  scalesizeH);
+                pnlReversi.Height = (int) (height * 0.8 * scalesizeH);
+                pnlReversi.Width = (int) (height * 0.8 * scalesizeW);
             }
             else
             {
-                pnlReversi.Height = (int) (width * 0.8);
-                pnlReversi.Width = (int) (width * 0.8);
+                pnlReversi.Height = (int) (width * 0.8 * scalesizeH);
+                pnlReversi.Width = (int) (width * 0.8* scalesizeW);
             }
+            Debug.WriteLine(pnlReversi.Size);
             pnlReversi.Location = new Point((int)(panelcell.Width/2 - pnlReversi.Width/2),(int)(panelcell.Height/2 - pnlReversi.Height/2));
             pnlReversi.Invalidate();
         }
         public class Reversiboard
         {
             private Disk[,] _diskarray;
+
+            public int[] DiskSize => (new int[2] {_diskarray.GetLength(0), _diskarray.GetLength(1)});
             private PictureBox _display;
 
             public int Totalturn;
@@ -77,7 +86,7 @@ namespace Reversiboard
             public Reversiboard(PictureBox pnlDisp)
             {
                 _display = pnlDisp;
-                _diskarray = new Disk[8, 8];
+                _diskarray = new Disk[8, 10];
                 Support = false;
                 Startgame();
 

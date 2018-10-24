@@ -67,7 +67,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 450);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(801, 450);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // panel2
@@ -119,9 +119,9 @@
             this.lblWit.ForeColor = System.Drawing.Color.White;
             this.lblWit.Location = new System.Drawing.Point(75, 92);
             this.lblWit.Name = "lblWit";
-            this.lblWit.Size = new System.Drawing.Size(136, 21);
+            this.lblWit.Size = new System.Drawing.Size(137, 21);
             this.lblWit.TabIndex = 2;
-            this.lblWit.Text = "Wit heeft 2 stenen";
+            this.lblWit.Text = "Wit heeft 2 Disk(s)";
             // 
             // btnPas
             // 
@@ -173,9 +173,9 @@
             this.lblZwart.ForeColor = System.Drawing.Color.White;
             this.lblZwart.Location = new System.Drawing.Point(75, 123);
             this.lblZwart.Name = "lblZwart";
-            this.lblZwart.Size = new System.Drawing.Size(152, 21);
+            this.lblZwart.Size = new System.Drawing.Size(153, 21);
             this.lblZwart.TabIndex = 4;
-            this.lblZwart.Text = "Zwart heeft 2 stenen";
+            this.lblZwart.Text = "Zwart heeft 2 Disk(s)";
             // 
             // lblTitel
             // 
@@ -197,13 +197,13 @@
             this.panelcell.Location = new System.Drawing.Point(300, 0);
             this.panelcell.Margin = new System.Windows.Forms.Padding(0);
             this.panelcell.Name = "panelcell";
-            this.panelcell.Size = new System.Drawing.Size(500, 450);
+            this.panelcell.Size = new System.Drawing.Size(501, 450);
             this.panelcell.TabIndex = 5;
             // 
             // pnlReversi
             // 
             this.pnlReversi.BackColor = System.Drawing.Color.Green;
-            this.pnlReversi.Location = new System.Drawing.Point(83, 34);
+            this.pnlReversi.Location = new System.Drawing.Point(75, 50);
             this.pnlReversi.Name = "pnlReversi";
             this.pnlReversi.Size = new System.Drawing.Size(350, 350);
             this.pnlReversi.TabIndex = 2;
@@ -218,7 +218,7 @@
             this.pictureBox2.Location = new System.Drawing.Point(0, 0);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(500, 450);
+            this.pictureBox2.Size = new System.Drawing.Size(501, 450);
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
             // 
@@ -226,7 +226,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(801, 450);
             this.Controls.Add(this.tableLayoutPanel1);
             this.DoubleBuffered = true;
             this.MinimumSize = new System.Drawing.Size(750, 489);
