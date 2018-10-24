@@ -3,8 +3,6 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
-//Nog mogelijke toekomstige aanpassingen: Laat zien wat wordt veranderd on hover
-
 
 namespace Reversiboard
 {
@@ -26,6 +24,8 @@ namespace Reversiboard
             
         }
 
+
+        // Eventhandler van een turn spelen
         public void PlayTurn (object sender, MouseEventArgs mea)
         {
             rb.PlayTurn(mea.X, mea.Y);
@@ -35,11 +35,15 @@ namespace Reversiboard
             lblZwart.Text = $"Zwart heeft {rb.Blacktotal} Disk(s)";
 
         } 
+
+        // event handler van een turn overslaan
         public void PassTurn(object sender, EventArgs e)
         {
             rb.PassTurn();
             lblStatus.Text = rb.Currentturn % 2 == 0 ? "Wit is aan zet" : "Zwart is aan zet";
         }
+
+        // Aanroep van een nieuwspel
         public void NewGame(object sender, EventArgs e)
         {
             rb.Startgame((int)numWidth.Value, (int)numHeight.Value);
@@ -47,6 +51,8 @@ namespace Reversiboard
             lblWit.Text = $"Wit heeft 2 Disk(s)";
             lblZwart.Text = $"Zwart heeft 2 Disk(s)";
         }
+
+        // Zorgt voor locatie bepaling en Size van het bord het heeft een verhouding van 10:80:10 Procent
         public void ResizeRender(object sender, EventArgs e)
         {
             int width = panelcell.Width;
@@ -88,6 +94,8 @@ namespace Reversiboard
             public bool Support;
             public int Whitetotal, Blacktotal, Passcounter;
 
+
+            // Constructor van reversiboard
             public Reversiboard(PictureBox pnlDisp)
             {
                 _display = pnlDisp;
@@ -96,7 +104,7 @@ namespace Reversiboard
                 Startgame();
 
             }
-
+            // Wordt opgeroepen bij het begin van het spel om size en alles in start scenario te zetten
             public void Startgame(int X = 6, int Y = 6)
             {
                 _diskarray = new Disk[X, Y];
@@ -116,10 +124,10 @@ namespace Reversiboard
                 
                 _display.Invalidate();
             }
+
+            // tekenen van het bord De render
             public void RbRender(object sender, PaintEventArgs e)
             {
-                Whitetotal = 0;
-                Blacktotal = 0;
                 for (int i = 0; i < _diskarray.GetLength(0); i++)
                 {
                     for (int j = 0; j < _diskarray.GetLength(1); j++)
@@ -164,6 +172,8 @@ namespace Reversiboard
                 for (int i = 0; i <= _diskarray.GetLength(0); i++) { e.Graphics.DrawLine(new Pen(Brushes.DarkGreen, 3), new Point(i * panelWidth, 0), new Point(i * panelWidth, panelHeight * _diskarray.GetLength(1))); }
                 for (int i = 0; i <= _diskarray.GetLength(1); i++) { e.Graphics.DrawLine(new Pen(Brushes.DarkGreen, 3), new Point(0, i * panelHeight), new Point(panelWidth * _diskarray.GetLength(0), i * panelHeight)); }
             }
+
+            // Controleert alle disk locaties om de plek die geselecteerd is heen
             private void GameCheck(int x, int y, int user, bool spec)
             {
                 for (int i = -1; i < 2; i++)
@@ -182,6 +192,8 @@ namespace Reversiboard
 
             }
 
+
+            // Verlengende check na orginele check met 1 locatie ernaast
             private void ExtendedCheck(int x, int y, int user, int dirX, int dirY, bool spec)
             {
                 for (int i = 1; i < _diskarray.GetLength(1) || i < _diskarray.GetLength(0); i++)
@@ -208,6 +220,8 @@ namespace Reversiboard
 
                 }
             }
+
+            // Update het bord als de persoon klikt op een locatie die  state  -2 heeft
             public void PlayTurn(int x,int y)
             {
                 
@@ -227,6 +241,8 @@ namespace Reversiboard
                 }
 
             }
+
+            // Controleert of Het spel klaar is
             public void EndCheck()
             {
                 _display.Invalidate();
@@ -238,6 +254,8 @@ namespace Reversiboard
                     else { MessageBox.Show("Zwart heeft gewonnen", "Gefeliciteerd!", MessageBoxButtons.OK, MessageBoxIcon.Information); }
                 }
             }
+
+            //Telt Disks aantal
             public void Diskcounter()
             {
                 Whitetotal = 0;
@@ -251,6 +269,8 @@ namespace Reversiboard
                     }
                 }
             }
+
+            // Is de pas beurt zorgt ervoor dat het maximaal aantal turns met 1 toeneemt en de andere kleur weer aan de beurt is.
             public void PassTurn()
             {
                 Passcounter++;
@@ -259,6 +279,7 @@ namespace Reversiboard
                 _display.Invalidate();
                 EndCheck();
             }
+            //Help knop en zorgt ervoor dat kleuren worden gerendert
             public void Support_click(object sender, EventArgs e)
             {
                 Support = !Support;
@@ -269,6 +290,7 @@ namespace Reversiboard
             {
                 public int State;
 
+                //klasse maakt gebruikt van Staat van DiskColor
                 public Color[] DiskColor
                 {
                     get
