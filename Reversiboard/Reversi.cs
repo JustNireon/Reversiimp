@@ -91,9 +91,10 @@ namespace Reversiboard
                 Startgame();
 
             }
-            public void Startgame()
+
+            public void Startgame(int X = 6, int Y = 6)
             {
-                
+                _diskarray = new Disk[X, Y];
                 for (int i = 0; i < _diskarray.GetLength(0); i++)
                 {
                     for (int j = 0; j < _diskarray.GetLength(1); j++)
@@ -108,10 +109,6 @@ namespace Reversiboard
                 Totalturn = _diskarray.GetLength(0) * _diskarray.GetLength(1) - 4;
                 Currentturn = 0;
                 _display.Invalidate();
-            }
-            public void SetSize(int x, int y)
-            {
-                _diskarray = new Disk[x, y];
             }
             public void RbRender(object sender, PaintEventArgs e)
             {

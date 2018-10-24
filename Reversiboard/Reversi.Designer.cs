@@ -31,6 +31,10 @@
             this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.lblBoardWidth = new System.Windows.Forms.Label();
+            this.numWidth = new System.Windows.Forms.NumericUpDown();
+            this.lblBoardHeight = new System.Windows.Forms.Label();
+            this.numHeight = new System.Windows.Forms.NumericUpDown();
             this.btnHelp = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblWit = new System.Windows.Forms.Label();
@@ -44,18 +48,14 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.numHeight = new System.Windows.Forms.NumericUpDown();
-            this.lblBoardHeight = new System.Windows.Forms.Label();
-            this.numWidth = new System.Windows.Forms.NumericUpDown();
-            this.lblBoardWidth = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numWidth)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelcell.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pnlReversi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numHeight)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numWidth)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -97,6 +97,82 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(300, 450);
             this.panel2.TabIndex = 4;
+            // 
+            // lblBoardWidth
+            // 
+            this.lblBoardWidth.AutoSize = true;
+            this.lblBoardWidth.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(101)))), ((int)(((byte)(107)))));
+            this.lblBoardWidth.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.lblBoardWidth.ForeColor = System.Drawing.Color.White;
+            this.lblBoardWidth.Location = new System.Drawing.Point(12, 317);
+            this.lblBoardWidth.Name = "lblBoardWidth";
+            this.lblBoardWidth.Size = new System.Drawing.Size(103, 21);
+            this.lblBoardWidth.TabIndex = 13;
+            this.lblBoardWidth.Text = "Breedte bord:";
+            // 
+            // numWidth
+            // 
+            this.numWidth.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(101)))), ((int)(((byte)(107)))));
+            this.numWidth.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.numWidth.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.numWidth.ForeColor = System.Drawing.Color.White;
+            this.numWidth.Location = new System.Drawing.Point(126, 319);
+            this.numWidth.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.numWidth.Minimum = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.numWidth.Name = "numWidth";
+            this.numWidth.Size = new System.Drawing.Size(44, 23);
+            this.numWidth.TabIndex = 12;
+            this.numWidth.Value = new decimal(new int[] {
+            6,
+            0,
+            0,
+            0});
+            // 
+            // lblBoardHeight
+            // 
+            this.lblBoardHeight.AutoSize = true;
+            this.lblBoardHeight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(101)))), ((int)(((byte)(107)))));
+            this.lblBoardHeight.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.lblBoardHeight.ForeColor = System.Drawing.Color.White;
+            this.lblBoardHeight.Location = new System.Drawing.Point(12, 288);
+            this.lblBoardHeight.Name = "lblBoardHeight";
+            this.lblBoardHeight.Size = new System.Drawing.Size(101, 21);
+            this.lblBoardHeight.TabIndex = 11;
+            this.lblBoardHeight.Text = "Hoogte bord:";
+            // 
+            // numHeight
+            // 
+            this.numHeight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(101)))), ((int)(((byte)(107)))));
+            this.numHeight.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.numHeight.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.numHeight.ForeColor = System.Drawing.Color.White;
+            this.numHeight.Location = new System.Drawing.Point(126, 290);
+            this.numHeight.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.numHeight.Minimum = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.numHeight.Name = "numHeight";
+            this.numHeight.Size = new System.Drawing.Size(44, 23);
+            this.numHeight.TabIndex = 10;
+            this.numHeight.Value = new decimal(new int[] {
+            6,
+            0,
+            0,
+            0});
             // 
             // btnHelp
             // 
@@ -232,82 +308,6 @@
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
             // 
-            // numHeight
-            // 
-            this.numHeight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(101)))), ((int)(((byte)(107)))));
-            this.numHeight.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numHeight.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.numHeight.ForeColor = System.Drawing.Color.White;
-            this.numHeight.Location = new System.Drawing.Point(126, 290);
-            this.numHeight.Maximum = new decimal(new int[] {
-            99,
-            0,
-            0,
-            0});
-            this.numHeight.Minimum = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
-            this.numHeight.Name = "numHeight";
-            this.numHeight.Size = new System.Drawing.Size(44, 23);
-            this.numHeight.TabIndex = 10;
-            this.numHeight.Value = new decimal(new int[] {
-            6,
-            0,
-            0,
-            0});
-            // 
-            // lblBoardHeight
-            // 
-            this.lblBoardHeight.AutoSize = true;
-            this.lblBoardHeight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(101)))), ((int)(((byte)(107)))));
-            this.lblBoardHeight.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.lblBoardHeight.ForeColor = System.Drawing.Color.White;
-            this.lblBoardHeight.Location = new System.Drawing.Point(12, 288);
-            this.lblBoardHeight.Name = "lblBoardHeight";
-            this.lblBoardHeight.Size = new System.Drawing.Size(101, 21);
-            this.lblBoardHeight.TabIndex = 11;
-            this.lblBoardHeight.Text = "Hoogte bord:";
-            // 
-            // numWidth
-            // 
-            this.numWidth.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(101)))), ((int)(((byte)(107)))));
-            this.numWidth.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numWidth.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.numWidth.ForeColor = System.Drawing.Color.White;
-            this.numWidth.Location = new System.Drawing.Point(126, 319);
-            this.numWidth.Maximum = new decimal(new int[] {
-            99,
-            0,
-            0,
-            0});
-            this.numWidth.Minimum = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
-            this.numWidth.Name = "numWidth";
-            this.numWidth.Size = new System.Drawing.Size(44, 23);
-            this.numWidth.TabIndex = 12;
-            this.numWidth.Value = new decimal(new int[] {
-            6,
-            0,
-            0,
-            0});
-            // 
-            // lblBoardWidth
-            // 
-            this.lblBoardWidth.AutoSize = true;
-            this.lblBoardWidth.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(101)))), ((int)(((byte)(107)))));
-            this.lblBoardWidth.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.lblBoardWidth.ForeColor = System.Drawing.Color.White;
-            this.lblBoardWidth.Location = new System.Drawing.Point(12, 317);
-            this.lblBoardWidth.Name = "lblBoardWidth";
-            this.lblBoardWidth.Size = new System.Drawing.Size(103, 21);
-            this.lblBoardWidth.TabIndex = 13;
-            this.lblBoardWidth.Text = "Breedte bord:";
-            // 
             // Reversi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -321,12 +321,12 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numWidth)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panelcell.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pnlReversi)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numHeight)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numWidth)).EndInit();
             this.ResumeLayout(false);
 
         }
