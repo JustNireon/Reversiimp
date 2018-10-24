@@ -121,4 +121,7 @@
   <data name="swap-horizontal" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\swap-horizontal1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="floor_parquet_pattern_wood_wooden_floor-915182" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\floor_parquet_pattern_wood_wooden_floor-9151821.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
