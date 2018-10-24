@@ -61,6 +61,7 @@ namespace Reversiboard
                 pnlReversi.Height = (int) (width * 0.8);
                 pnlReversi.Width = (int) (width * 0.8);
             }
+            pnlReversi.Location = new Point((int)(panelcell.Width/2 - pnlReversi.Width/2),(int)(panelcell.Height/2 - pnlReversi.Height/2));
             pnlReversi.Invalidate();
         }
         public class Reversiboard
