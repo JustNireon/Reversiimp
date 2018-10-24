@@ -43,6 +43,7 @@ namespace Reversiboard
         public void NewGame(object sender, EventArgs e)
         {
             rb.Startgame((int)numWidth.Value, (int)numHeight.Value);
+            ResizeRender(null,null);
             lblWit.Text = $"Wit heeft 2 Disk(s)";
             lblZwart.Text = $"Zwart heeft 2 Disk(s)";
         }
@@ -112,6 +113,7 @@ namespace Reversiboard
                 _diskarray[_diskarray.GetLength(0) / 2, _diskarray.GetLength(1) / 2 - 1].State = 1;
                 Totalturn = _diskarray.GetLength(0) * _diskarray.GetLength(1) - 4;
                 Currentturn = 0;
+                
                 _display.Invalidate();
             }
             public void RbRender(object sender, PaintEventArgs e)
@@ -150,10 +152,11 @@ namespace Reversiboard
                         var diskcolor = _diskarray[i, j].DiskColor;
                         if (_diskarray[i, j].State > -1 || (Support))
                         {
-                            e.Graphics.FillEllipse(new SolidBrush(diskcolor[0]), new Rectangle(new Point(i * panelWidth+3, j * panelHeight+3), new Size(panelWidth-6, panelHeight-6)));
+                            Rectangle Circle = new Rectangle(new Point(i * panelWidth + 3, j * panelHeight + 3), new Size(panelWidth - 6, panelHeight - 6));
+                            e.Graphics.FillEllipse(new SolidBrush(diskcolor[0]),Circle);
                             if (_diskarray[i, j].State > -1)
                             {
-                                e.Graphics.FillEllipse(new SolidBrush(diskcolor[1]), new Rectangle(new Point(i * panelWidth + 12, j * panelHeight + 12), new Size(panelWidth - 24, panelHeight - 24)));
+                                e.Graphics.FillEllipse(new SolidBrush(diskcolor[1]), new Rectangle(new Point(Circle.X + (int)(panelWidth*0.15), Circle.Y + (int) (panelHeight * 0.15)), new Size((int) (Circle.Width*0.7), (int) (Circle.Height * 0.7))));
                             }
                         }
                     }
@@ -181,7 +184,7 @@ namespace Reversiboard
 
             private void ExtendedCheck(int x, int y, int user, int dirX, int dirY, bool spec)
             {
-                for (int i = 1; i < _diskarray.GetLength(1) && i < _diskarray.GetLength(0); i++)
+                for (int i = 1; i < _diskarray.GetLength(1) || i < _diskarray.GetLength(0); i++)
                 {
                     if ((x + i * dirX < 0 || x + i * dirX >= _diskarray.GetLength(0) || y + i * dirY < 0 || y + i * dirY >= _diskarray.GetLength(1))) { continue; }
                     if (_diskarray[x + i * dirX, y + i * dirY].State < 0) { if (spec) { _diskarray[x + i * dirX, y + i * dirY].State = -2; break; } else { break; } }
@@ -226,6 +229,7 @@ namespace Reversiboard
             }
             public void EndCheck()
             {
+                _display.Invalidate();
                 if (Passcounter == 2|| Currentturn == Totalturn)
                 {
                     Diskcounter();
@@ -251,6 +255,7 @@ namespace Reversiboard
             {
                 Passcounter++;
                 Currentturn++;
+                Totalturn++;
                 _display.Invalidate();
                 EndCheck();
             }
@@ -298,16 +303,6 @@ namespace Reversiboard
                     State = -1;
                 }
             }
-        }
-
-        private void pnlReversi_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void instellenGrootteBordToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void numHeight_ValueChanged(object sender, EventArgs e)

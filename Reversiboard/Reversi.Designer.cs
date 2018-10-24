@@ -296,7 +296,6 @@
             this.pnlReversi.Size = new System.Drawing.Size(350, 350);
             this.pnlReversi.TabIndex = 2;
             this.pnlReversi.TabStop = false;
-            this.pnlReversi.Click += new System.EventHandler(this.pnlReversi_Click);
             // 
             // pictureBox2
             // 
