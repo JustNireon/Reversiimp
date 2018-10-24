@@ -19,6 +19,7 @@ namespace Reversiboard
             btnPas.Click += PassTurn;
             btnNew.Click += NewGame;
             btnHelp.Click += rb.Support_click;
+            this.ResizeRender(null,null);
             
             
         }
@@ -39,7 +40,6 @@ namespace Reversiboard
         }
         public void NewGame(object sender, EventArgs e)
         {
-            rb.SetSize(8,8);
             rb.Startgame();
         }
         public void ResizeRender(object sender, EventArgs e)
@@ -53,19 +53,19 @@ namespace Reversiboard
 
             float scalesizeW =  (float) rb.DiskSize[0]/rb.DiskSize[1];
             float scalesizeH = (float) rb.DiskSize[1] / rb.DiskSize[0];
-            scalesizeH =  scalesizeH < scalesizeW? scalesizeH: 1;
-            scalesizeW = scalesizeH > scalesizeW ? scalesizeW : 1;
-            pnlReversi.Location = new Point((int)(width * 0.1), (int)(height * .1));
+            scalesizeH =  scalesizeH > scalesizeW? scalesizeH : 1;
+            scalesizeW = scalesizeH < scalesizeW ? scalesizeW : 1;
+            
+            pnlReversi.Location = new Point((int)(width * .1), (int)(height * .1));
             if (width > height)
             {
-                Debug.WriteLine(height +  0.8 +  scalesizeH);
-                pnlReversi.Height = (int) (height * 0.8 * scalesizeH);
-                pnlReversi.Width = (int) (height * 0.8 * scalesizeW);
+                pnlReversi.Height = (int) (height * scalesizeH * 0.8 );
+                pnlReversi.Width = (int) (height* scalesizeW * 0.8 );
             }
             else
             {
-                pnlReversi.Height = (int) (width * 0.8 * scalesizeH);
-                pnlReversi.Width = (int) (width * 0.8* scalesizeW);
+                pnlReversi.Height = (int) (width * scalesizeH  * 0.8 );
+                pnlReversi.Width = (int) (width * scalesizeW * 0.8);
             }
             Debug.WriteLine(pnlReversi.Size);
             pnlReversi.Location = new Point((int)(panelcell.Width/2 - pnlReversi.Width/2),(int)(panelcell.Height/2 - pnlReversi.Height/2));
@@ -86,13 +86,13 @@ namespace Reversiboard
             public Reversiboard(PictureBox pnlDisp)
             {
                 _display = pnlDisp;
-                _diskarray = new Disk[8, 10];
+                _diskarray = new Disk[12, 8];
                 Support = false;
                 Startgame();
 
             }
 
-            public void Startgame(int X = 6, int Y = 6)
+            public void Startgame(int X = 8, int Y =6 )
             {
                 _diskarray = new Disk[X, Y];
                 for (int i = 0; i < _diskarray.GetLength(0); i++)
