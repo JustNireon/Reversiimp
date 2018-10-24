@@ -118,7 +118,7 @@
             this.numWidth.ForeColor = System.Drawing.Color.White;
             this.numWidth.Location = new System.Drawing.Point(126, 319);
             this.numWidth.Maximum = new decimal(new int[] {
-            99,
+            20,
             0,
             0,
             0});
@@ -135,6 +135,7 @@
             0,
             0,
             0});
+            this.numWidth.ValueChanged += new System.EventHandler(this.numWidth_ValueChanged);
             // 
             // lblBoardHeight
             // 
@@ -156,7 +157,7 @@
             this.numHeight.ForeColor = System.Drawing.Color.White;
             this.numHeight.Location = new System.Drawing.Point(126, 290);
             this.numHeight.Maximum = new decimal(new int[] {
-            99,
+            20,
             0,
             0,
             0});
@@ -173,6 +174,7 @@
             0,
             0,
             0});
+            this.numHeight.ValueChanged += new System.EventHandler(this.numHeight_ValueChanged);
             // 
             // btnHelp
             // 

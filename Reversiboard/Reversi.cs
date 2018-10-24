@@ -3,6 +3,9 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
+//Nog mogelijke toekomstige aanpassingen: Laat zien wat wordt veranderd on hover
+
+
 namespace Reversiboard
 {
     public partial class Reversi : Form
@@ -19,7 +22,6 @@ namespace Reversiboard
             btnPas.Click += PassTurn;
             btnNew.Click += NewGame;
             btnHelp.Click += rb.Support_click;
-            this.ResizeRender(null,null);
             
             
         }
@@ -40,7 +42,9 @@ namespace Reversiboard
         }
         public void NewGame(object sender, EventArgs e)
         {
-            rb.Startgame();
+            rb.Startgame((int)numWidth.Value, (int)numHeight.Value);
+            lblWit.Text = $"Wit heeft 2 Disk(s)";
+            lblZwart.Text = $"Zwart heeft 2 Disk(s)";
         }
         public void ResizeRender(object sender, EventArgs e)
         {
@@ -53,19 +57,19 @@ namespace Reversiboard
 
             float scalesizeW =  (float) rb.DiskSize[0]/rb.DiskSize[1];
             float scalesizeH = (float) rb.DiskSize[1] / rb.DiskSize[0];
-            scalesizeH =  scalesizeH > scalesizeW? scalesizeH : 1;
-            scalesizeW = scalesizeH < scalesizeW ? scalesizeW : 1;
-            
-            pnlReversi.Location = new Point((int)(width * .1), (int)(height * .1));
+            scalesizeH =  scalesizeH < scalesizeW? scalesizeH: 1;
+            scalesizeW = scalesizeH > scalesizeW ? scalesizeW : 1;
+            pnlReversi.Location = new Point((int)(width * 0.1), (int)(height * .1));
             if (width > height)
             {
-                pnlReversi.Height = (int) (height * scalesizeH * 0.8 );
-                pnlReversi.Width = (int) (height* scalesizeW * 0.8 );
+                Debug.WriteLine(height +  0.8 +  scalesizeH);
+                pnlReversi.Height = (int) (height * 0.8 * scalesizeH);
+                pnlReversi.Width = (int) (height * 0.8 * scalesizeW);
             }
             else
             {
-                pnlReversi.Height = (int) (width * scalesizeH  * 0.8 );
-                pnlReversi.Width = (int) (width * scalesizeW * 0.8);
+                pnlReversi.Height = (int) (width * 0.8 * scalesizeH);
+                pnlReversi.Width = (int) (width * 0.8* scalesizeW);
             }
             Debug.WriteLine(pnlReversi.Size);
             pnlReversi.Location = new Point((int)(panelcell.Width/2 - pnlReversi.Width/2),(int)(panelcell.Height/2 - pnlReversi.Height/2));
@@ -86,13 +90,13 @@ namespace Reversiboard
             public Reversiboard(PictureBox pnlDisp)
             {
                 _display = pnlDisp;
-                _diskarray = new Disk[12, 8];
+                _diskarray = new Disk[6, 6];
                 Support = false;
                 Startgame();
 
             }
 
-            public void Startgame(int X = 8, int Y =6 )
+            public void Startgame(int X = 6, int Y = 6)
             {
                 _diskarray = new Disk[X, Y];
                 for (int i = 0; i < _diskarray.GetLength(0); i++)
@@ -304,6 +308,16 @@ namespace Reversiboard
         private void instellenGrootteBordToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void numHeight_ValueChanged(object sender, EventArgs e)
+        {
+            lblStatus.Text = "Veranderingen bordgrootte worden \npas in het volgend spel doorgevoerd.";
+        }
+
+        private void numWidth_ValueChanged(object sender, EventArgs e)
+        {
+            lblStatus.Text = "Veranderingen bordgrootte worden \npas in het volgend spel doorgevoerd.";
         }
     }
 }
