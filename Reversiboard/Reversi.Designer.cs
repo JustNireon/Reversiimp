@@ -50,15 +50,16 @@
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.75F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 62.25F));
-            this.tableLayoutPanel1.Controls.Add(this.pnlReversi, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.panel2, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.pnlReversi, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.panel2, 0, 1);
             this.tableLayoutPanel1.Cursor = System.Windows.Forms.Cursors.Default;
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 450);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
@@ -70,7 +71,7 @@
             this.pnlReversi.Margin = new System.Windows.Forms.Padding(0);
             this.pnlReversi.Name = "pnlReversi";
             this.pnlReversi.Size = new System.Drawing.Size(498, 450);
-            this.pnlReversi.TabIndex = 5;
+            this.pnlReversi.TabIndex = 8;
             // 
             // panel2
             // 
@@ -219,7 +220,7 @@
         private System.Windows.Forms.Button btnNew;
         private System.Windows.Forms.Label lblZwart;
         private System.Windows.Forms.Label lblTitel;
-        private System.Windows.Forms.Panel pnlReversi;
         public System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.Panel pnlReversi;
     }
 }

@@ -241,5 +241,10 @@ namespace Reversiboard
                 Display.Invalidate();
             }
         }
+
+        private void instellenGrootteBordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
