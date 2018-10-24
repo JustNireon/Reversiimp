@@ -66,14 +66,14 @@ namespace Reversiboard
         public class Reversiboard
         {
             private Disk[,] _diskarray;
-            private Panel _display;
+            private PictureBox _display;
 
             public int Totalturn;
             public int Currentturn;
             public bool Support;
             public int Whitetotal, Blacktotal, Passcounter;
 
-            public Reversiboard(Panel pnlDisp)
+            public Reversiboard(PictureBox pnlDisp)
             {
                 _display = pnlDisp;
                 _diskarray = new Disk[8, 8];
@@ -287,6 +287,11 @@ namespace Reversiboard
                     State = -1;
                 }
             }
+        }
+
+        private void pnlReversi_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

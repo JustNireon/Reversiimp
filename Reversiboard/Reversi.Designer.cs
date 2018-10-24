@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnHelp = new System.Windows.Forms.Button();
@@ -39,12 +40,15 @@
             this.lblZwart = new System.Windows.Forms.Label();
             this.lblTitel = new System.Windows.Forms.Label();
             this.panelcell = new System.Windows.Forms.Panel();
-            this.pnlReversi = new System.Windows.Forms.Panel();
+            this.pnlReversi = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.helpProvider1 = new System.Windows.Forms.HelpProvider();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelcell.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pnlReversi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -198,13 +202,13 @@
             // 
             // pnlReversi
             // 
-            this.pnlReversi.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pnlReversi.BackColor = System.Drawing.Color.Green;
-            this.pnlReversi.Location = new System.Drawing.Point(51, 45);
-            this.pnlReversi.Margin = new System.Windows.Forms.Padding(0);
+            this.pnlReversi.Location = new System.Drawing.Point(83, 34);
             this.pnlReversi.Name = "pnlReversi";
-            this.pnlReversi.Size = new System.Drawing.Size(353, 360);
-            this.pnlReversi.TabIndex = 0;
+            this.pnlReversi.Size = new System.Drawing.Size(350, 350);
+            this.pnlReversi.TabIndex = 2;
+            this.pnlReversi.TabStop = false;
+            this.pnlReversi.Click += new System.EventHandler(this.pnlReversi_Click);
             // 
             // pictureBox2
             // 
@@ -233,6 +237,7 @@
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panelcell.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pnlReversi)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
@@ -251,7 +256,9 @@
         private System.Windows.Forms.Label lblTitel;
         public System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.Panel panelcell;
-        private System.Windows.Forms.Panel pnlReversi;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pnlReversi;
+        private System.Windows.Forms.HelpProvider helpProvider1;
+        private System.Windows.Forms.Timer timer1;
     }
 }
