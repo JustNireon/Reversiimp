@@ -86,7 +86,7 @@ namespace Reversiboard
             public Reversiboard(PictureBox pnlDisp)
             {
                 _display = pnlDisp;
-                _diskarray = new Disk[8, 10];
+                _diskarray = new Disk[6, 6];
                 Support = false;
                 Startgame();
 
